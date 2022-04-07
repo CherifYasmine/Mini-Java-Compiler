@@ -55,60 +55,60 @@ extern int line;
 
 %%
                                                            
-program			:  MainClass ClassDeclarationGeneral ;
+program			:  MainClass ClassDeclarationS ;
 
     
 
 
 
-ClassDeclarationGeneral       :ClassDeclaration ClassDeclarationGeneral                      
+ClassDeclarationS       :ClassDeclaration ClassDeclarationS                      
                         |epsilon;
 
 
-ClassDeclaration	:CLASS ID EXTENDSIDG BRACE_OUVRANTE VarDeclarationG MethodDeclarationG BRACE_FERMANTE
-                        |error ID EXTENDSIDG BRACE_OUVRANTE VarDeclarationG MethodDeclarationG BRACE_FERMANTE          {yyerror ("erreur mot cle class errone "); YYABORT}
-                        |CLASS error  EXTENDSIDG BRACE_OUVRANTE VarDeclarationG MethodDeclarationG BRACE_FERMANTE          {yyerror ("erreur identifier errone "); YYABORT}
-                        |CLASS ID  EXTENDSIDG error VarDeclarationG MethodDeclarationG BRACE_FERMANTE              {yyerror ("erreur acolade ouvarnte  manquant "); YYABORT}
-                        |CLASS ID  EXTENDSIDG BRACE_OUVRANTE VarDeclarationG MethodDeclarationG error          {yyerror (" erreur acolade fermante  manquant "); YYABORT};
+ClassDeclaration	:CLASS ID EXTENDSID BRACE_OUVRANTE VarDeclarationS MethodDeclarationS BRACE_FERMANTE
+                        |error ID EXTENDSID BRACE_OUVRANTE VarDeclarationS MethodDeclarationS BRACE_FERMANTE          {yyerror ("erreur mot cle class errone "); YYABORT}
+                        |CLASS error  EXTENDSID BRACE_OUVRANTE VarDeclarationS MethodDeclarationS BRACE_FERMANTE          {yyerror ("erreur identifier errone "); YYABORT}
+                        |CLASS ID  EXTENDSID error VarDeclarationS MethodDeclarationS BRACE_FERMANTE              {yyerror ("erreur acolade ouvarnte  manquant "); YYABORT}
+                        |CLASS ID  EXTENDSID BRACE_OUVRANTE VarDeclarationS MethodDeclarationS error          {yyerror (" erreur acolade fermante  manquant "); YYABORT};
   
-EXTENDSIDG		:EXTENDS ID
+EXTENDSID		:EXTENDS ID
                         |epsilon
                         |error ID  {yyerror (" mot cle EXTENDS manquant ou bien errone "); YYABORT}
                         |CLASS error  {yyerror ("erreur identifier errone "); YYABORT}; 
 
 
-VarDeclarationG		:VarDeclaration VarDeclarationG	
+VarDeclarationS		:VarDeclaration VarDeclarationS	
                         |epsilon;
 
-MethodDeclarationG	:MethodDeclaration MethodDeclarationG	
+MethodDeclarationS	:MethodDeclaration MethodDeclarationS	
                         |epsilon;
 
-STATEMENTG		:STATEMENT STATEMENTG 
+STATEMENTS		:STATEMENT STATEMENTS 
                         |epsilon;
 
 VarDeclaration		:Type ID  POINT_VIRGULE;
                         |Type error POINT_VIRGULE {yyerror ("erreur identifier errone "); YYABORT} 
                         |Type ID  error  {yyerror ("POINT_VIRGULE  manquant "); YYABORT}; 
 
-VTIG                    :VTI VTIG
+ONEARGG                    :ONEARG ONEARGG
                         |epsilon;
 
-VTI                     :VIRGULE Type ID
+ONEARG                     :VIRGULE Type ID
                         |error Type ID                  {yyerror ("VIRGULE manquant "); YYABORT}     
                         |VIRGULE Type error                  {yyerror ("identifier errone "); YYABORT}     ;
 
-TIVTIG                  :Type ID VTIG
+ARGS                  :Type ID ONEARGG
                         |epsilon;
 
-MethodDeclaration	:PUBLIC Type ID PARENTHESE_OUVRANTE TIVTIG PARENTHESE_FERMANTE BRACE_OUVRANTE VarDeclarationG STATEMENTG RETURN EXPRESSION POINT_VIRGULE BRACE_FERMANTE   
-                        |error Type ID PARENTHESE_OUVRANTE TIVTIG PARENTHESE_FERMANTE BRACE_OUVRANTE VarDeclarationG STATEMENTG RETURN EXPRESSION POINT_VIRGULE BRACE_FERMANTE    {yyerror ("mot clee class manquant ou errone "); YYABORT}
-                        |PUBLIC Type error PARENTHESE_OUVRANTE TIVTIG PARENTHESE_FERMANTE BRACE_OUVRANTE VarDeclarationG STATEMENTG RETURN EXPRESSION POINT_VIRGULE BRACE_FERMANTE      {yyerror ("erreur identifier errone "); YYABORT} 
-                        |PUBLIC Type ID error TIVTIG PARENTHESE_FERMANTE BRACE_OUVRANTE VarDeclarationG STATEMENTG RETURN EXPRESSION POINT_VIRGULE BRACE_FERMANTE      {yyerror ("erreur parenthese ouvarnte  manquante "); YYABORT} 
-                        |PUBLIC Type ID PARENTHESE_OUVRANTE TIVTIG error BRACE_OUVRANTE VarDeclarationG STATEMENTG RETURN EXPRESSION POINT_VIRGULE BRACE_FERMANTE     {yyerror ("erreur parenthese fermante  manquante "); YYABORT}
-                        |PUBLIC Type ID PARENTHESE_OUVRANTE TIVTIG PARENTHESE_FERMANTE  error VarDeclarationG STATEMENTG RETURN EXPRESSION POINT_VIRGULE BRACE_FERMANTE     {yyerror ("acolade ouvrant  manquant "); YYABORT}
-                        |PUBLIC Type ID PARENTHESE_OUVRANTE TIVTIG PARENTHESE_FERMANTE  BRACE_OUVRANTE VarDeclarationG STATEMENTG error EXPRESSION POINT_VIRGULE BRACE_FERMANTE     {yyerror ("mot clee return manquant ou errone "); YYABORT}
-                        |PUBLIC Type ID PARENTHESE_OUVRANTE TIVTIG PARENTHESE_FERMANTE  BRACE_OUVRANTE VarDeclarationG STATEMENTG RETURN EXPRESSION error BRACE_FERMANTE     {yyerror ("POINT_VIRGULE manquant  "); YYABORT}
-                        |PUBLIC Type ID PARENTHESE_OUVRANTE TIVTIG PARENTHESE_FERMANTE  BRACE_OUVRANTE VarDeclarationG STATEMENTG RETURN EXPRESSION POINT_VIRGULE error     {yyerror ("acolade fermant  manquante "); YYABORT};
+MethodDeclaration	:PUBLIC Type ID PARENTHESE_OUVRANTE ARGS PARENTHESE_FERMANTE BRACE_OUVRANTE VarDeclarationS STATEMENTS RETURN EXPRESSION POINT_VIRGULE BRACE_FERMANTE   
+                        |error Type ID PARENTHESE_OUVRANTE ARGS PARENTHESE_FERMANTE BRACE_OUVRANTE VarDeclarationS STATEMENTS RETURN EXPRESSION POINT_VIRGULE BRACE_FERMANTE    {yyerror ("mot clee class manquant ou errone "); YYABORT}
+                        |PUBLIC Type error PARENTHESE_OUVRANTE ARGS PARENTHESE_FERMANTE BRACE_OUVRANTE VarDeclarationS STATEMENTS RETURN EXPRESSION POINT_VIRGULE BRACE_FERMANTE      {yyerror ("erreur identifier errone "); YYABORT} 
+                        |PUBLIC Type ID error ARGS PARENTHESE_FERMANTE BRACE_OUVRANTE VarDeclarationS STATEMENTS RETURN EXPRESSION POINT_VIRGULE BRACE_FERMANTE      {yyerror ("erreur parenthese ouvarnte  manquante "); YYABORT} 
+                        |PUBLIC Type ID PARENTHESE_OUVRANTE ARGS error BRACE_OUVRANTE VarDeclarationS STATEMENTS RETURN EXPRESSION POINT_VIRGULE BRACE_FERMANTE     {yyerror ("erreur parenthese fermante  manquante "); YYABORT}
+                        |PUBLIC Type ID PARENTHESE_OUVRANTE ARGS PARENTHESE_FERMANTE  error VarDeclarationS STATEMENTS RETURN EXPRESSION POINT_VIRGULE BRACE_FERMANTE     {yyerror ("acolade ouvrant  manquant "); YYABORT}
+                        |PUBLIC Type ID PARENTHESE_OUVRANTE ARGS PARENTHESE_FERMANTE  BRACE_OUVRANTE VarDeclarationS STATEMENTS error EXPRESSION POINT_VIRGULE BRACE_FERMANTE     {yyerror ("mot clee return manquant ou errone "); YYABORT}
+                        |PUBLIC Type ID PARENTHESE_OUVRANTE ARGS PARENTHESE_FERMANTE  BRACE_OUVRANTE VarDeclarationS STATEMENTS RETURN EXPRESSION error BRACE_FERMANTE     {yyerror ("POINT_VIRGULE manquant  "); YYABORT}
+                        |PUBLIC Type ID PARENTHESE_OUVRANTE ARGS PARENTHESE_FERMANTE  BRACE_OUVRANTE VarDeclarationS STATEMENTS RETURN EXPRESSION POINT_VIRGULE error     {yyerror ("acolade fermant  manquante "); YYABORT};
                         
 
 
@@ -142,7 +142,7 @@ ARG			: PARENTHESE_OUVRANTE STRING BRACKET_OUVRANTE BRACKET_FERMANTE ID PARENTHE
 
 
 
-STATEMENT		:STATEMENTG              
+STATEMENT		:STATEMENTS              
                         |IF PARENTHESE_OUVRANTE EXPRESSION PARENTHESE_FERMANTE  BRACE_OUVRANTE STATEMENT BRACE_FERMANTE  ELSE BRACE_OUVRANTE STATEMENT BRACE_FERMANTE
                         |IF PARENTHESE_OUVRANTE EXPRESSION PARENTHESE_FERMANTE  BRACE_OUVRANTE STATEMENT BRACE_FERMANTE  ELSE  STATEMENT 
                         |IF PARENTHESE_OUVRANTE EXPRESSION PARENTHESE_FERMANTE   STATEMENT ELSE BRACE_OUVRANTE STATEMENT BRACE_FERMANTE
@@ -187,11 +187,11 @@ EXPRESSION		:EXPRESSION OPERATOR EXPRESSION
                         |EXPRESSION error LENGTH                                                                {yyerror ("POINT manquant "); YYABORT}
                         |EXPRESSION POINT error                                                                 {yyerror ("mot cle LENGTH manquant "); YYABORT}
 
-                        |EXPRESSION POINT ID PARENTHESE_OUVRANTE EVEXPRESSION PARENTHESE_FERMANTE
-                        |EXPRESSION error ID PARENTHESE_OUVRANTE EVEXPRESSION PARENTHESE_FERMANTE                             {yyerror ("POINT manquant "); YYABORT}
-                        |EXPRESSION POINT error PARENTHESE_OUVRANTE EVEXPRESSION PARENTHESE_FERMANTE                          {yyerror ("erreur identifier errone "); YYABORT}
-                        |EXPRESSION POINT ID error EVEXPRESSION PARENTHESE_FERMANTE                                    {yyerror ("erreur parenthese ouvarnte  manquante "); YYABORT}
-                        |EXPRESSION POINT ID PARENTHESE_OUVRANTE EVEXPRESSION error                                    {yyerror ("erreur parenthese fermante  manquante "); YYABORT}
+                        |EXPRESSION POINT ID PARENTHESE_OUVRANTE EXPAFTEREXP PARENTHESE_FERMANTE
+                        |EXPRESSION error ID PARENTHESE_OUVRANTE EXPAFTEREXP PARENTHESE_FERMANTE                             {yyerror ("POINT manquant "); YYABORT}
+                        |EXPRESSION POINT error PARENTHESE_OUVRANTE EXPAFTEREXP PARENTHESE_FERMANTE                          {yyerror ("erreur identifier errone "); YYABORT}
+                        |EXPRESSION POINT ID error EXPAFTEREXP PARENTHESE_FERMANTE                                    {yyerror ("erreur parenthese ouvarnte  manquante "); YYABORT}
+                        |EXPRESSION POINT ID PARENTHESE_OUVRANTE EXPAFTEREXP error                                    {yyerror ("erreur parenthese fermante  manquante "); YYABORT}
 
 
                         |NUMBER
@@ -220,11 +220,11 @@ EXPRESSION		:EXPRESSION OPERATOR EXPRESSION
                         |PARENTHESE_OUVRANTE EXPRESSION error                                                          {yyerror ("erreur parenthese fermante  manquante "); YYABORT} ;
 
 
-EVEXPRESSION		:EXPRESSION VEXPRESSION
+EXPAFTEREXP		:EXPRESSION EXPRESSIONS
 			|epsilon;
 
-VEXPRESSION		:VIRGULE EXPRESSION VEXPRESSION
-                        |error EXPRESSION VEXPRESSION                                                                      {yyerror ("erreur VIRGULE manquante "); YYABORT}
+EXPRESSIONS		:VIRGULE EXPRESSION EXPRESSIONS
+                        |error EXPRESSION EXPRESSIONS                                                                      {yyerror ("erreur VIRGULE manquante "); YYABORT}
 			|epsilon;
 
 

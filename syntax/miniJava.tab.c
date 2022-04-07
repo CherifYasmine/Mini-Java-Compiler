@@ -558,11 +558,11 @@ static const char *const yytname[] =
   "POINT_VIRGULE", "VIRGULE", "AFFECTATION", "OPERATOR", "ID", "NUMBER",
   "BOOL", "PARENTHESE_OUVRANTE", "PARENTHESE_FERMANTE", "BRACE_OUVRANTE",
   "BRACE_FERMANTE", "BRACKET_FERMANTE", "BRACKET_OUVRANTE", "NOT",
-  "$accept", "program", "ClassDeclarationG", "ClassDeclaration",
-  "EXTENDSIDG", "VarDeclarationG", "MethodDeclarationG", "STATEMENTG",
-  "VarDeclaration", "VTIG", "VTI", "TIVTIG", "MethodDeclaration", "Type",
-  "MainClass", "ARG", "STATEMENT", "EXPRESSION", "EVEXPRESSION",
-  "VEXPRESSION", "epsilon", 0
+  "$accept", "program", "ClassDeclarationS", "ClassDeclaration",
+  "EXTENDSID", "VarDeclarationS", "MethodDeclarationS", "STATEMENTS",
+  "VarDeclaration", "ONEARGG", "ONEARG", "ARGS", "MethodDeclaration",
+  "Type", "MainClass", "ARG", "STATEMENT", "EXPRESSION", "EXPAFTEREXP",
+  "EXPRESSIONS", "epsilon", 0
 };
 #endif
 
@@ -2535,7 +2535,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 239 "minijava.y"
+#line 236 "minijava.y"
  
 
 int yyerror(char const *msg) {

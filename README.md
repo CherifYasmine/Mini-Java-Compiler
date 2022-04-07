@@ -4,8 +4,8 @@
 cd syntax
 flex minijava.lex 
 bison -d minijava.y 
-gcc -o miniJava minijava.tab.c lex.yy.x 
-miniJava.exe < ../example.exe 
+gcc -o miniJava minijava.tab.c lex.yy.c
+miniJava.exe < ../example.txt
 ```
 ### Run the application
 ```
