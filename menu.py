@@ -80,7 +80,7 @@ class Run():
 
 
 def main(root, code, menubar, compiled):
-    filemenu = Menu(menubar)
+    filemenu = Menu(menubar, tearoff=0)
     menuObject = File(code, root)
     filemenu.add_command(label="New", command=menuObject.newFile)
     filemenu.add_command(label="Open", command=menuObject.openFile)
@@ -92,7 +92,7 @@ def main(root, code, menubar, compiled):
 
     runner = Run(code, compiled, menuObject)
 
-    executeMenu = Menu(menubar)
+    executeMenu = Menu(menubar, tearoff=0)
     executeMenu.add_command(label="Run", command=runner.compileFile)
     menubar.add_cascade(label="Run", menu=executeMenu)
 

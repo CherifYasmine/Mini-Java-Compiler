@@ -55,13 +55,13 @@ extern int line;
 
 %%
                                                            
-program			:  MainClass ClassDeclarationG ;
+program			:  MainClass ClassDeclarationGeneral ;
 
     
 
 
 
-ClassDeclarationG       :ClassDeclaration ClassDeclarationG                      
+ClassDeclarationGeneral       :ClassDeclaration ClassDeclarationGeneral                      
                         |epsilon;
 
 

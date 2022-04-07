@@ -10,6 +10,8 @@ def rgb_hack(rgb):
 root = Tk()
 root.title("Mini Java IDE")
 root.geometry("800x500")
+photo = PhotoImage(file='java.png')
+root.iconphoto(False, photo)
 root.minsize(width=400, height=400)
 
 panedWindow = PanedWindow(root,orient=VERTICAL)
