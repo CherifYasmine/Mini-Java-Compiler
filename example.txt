@@ -3,31 +3,13 @@ class Factorial{
    b=5+6 ;
    System.out.println ( true ) ;
    while (5>2)  a = true ; b =5 ;
-   if (5 > 2) { a = true ;} else  b =5 ;
-   a = new  a()
+   if (5 > 2) a = true ; else  b =5 ;
+   a = new  dog ();
     }
 }
-class dog{}
+class cat{}
 class dog extends cat {
-    int a ;
+    int a ; /* PROGRAMME NE MARCHE PAS */
     public int[] pss( int a , int c , int [] b , bool d ) { return 5 ; }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

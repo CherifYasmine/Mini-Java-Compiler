@@ -21,12 +21,10 @@ id        ([A-Za-z_][A-Za-z0-9_]*)
 nb        (-?[1-9][0-9]*)
 bool	  (true|false)
 iderrone  [0-9][A-Za-z0-9_]*
-comment_ouvrant "/*"
-comment_fermant "*/"
 
-COMMENT_LINE        "//"+([^\n])+"\n"
-COMMENT_LONG {comment_ouvrant}([^*]|"\n")*+{comment_fermant}
-COMMENT_BLOC_ouvrant 	   {comment_ouvrant}([^*]|\*+[^*/])*\*+
+Comment_block                   "/*"([^*]|\*+[^*/])*\*+"/"
+Comment_line                    "//".*\n
+Error_comment                   \/\*([^(\*\/)]|\n)*
 
 parenthese_ouvrante  (\()
 parenthese_fermante  (\))
@@ -93,15 +91,15 @@ bracket_fermante  (\])
 
 
 
-{COMMENT_LINE}         								     printf("commentaire line");  
-{COMMENT_LONG}        								     printf("commentaire long");   
+{Comment_line}         				  /* no actions */
+{Comment_block}         		      /* no actions */
 
 
 
 
-{iderrone}                    {fprintf(stderr," illegal identifier \'%s\' on line :%d\n",yytext,yylineno);}
-{COMMENT_BLOC_ouvrant}          {fprintf(stderr," comment ouvert \'%s\' on line :%d\n",yytext,yylineno);}
-{comment_fermant}		{fprintf(stderr," comment fermant \'%s\' on line :%d\n",yytext,yylineno);}	
+{iderrone}                    {fprintf(stderr,"illegal identifier \'%s\' a la ligne : %d\n",yytext,yylineno);}
+{Error_comment}                    	  {fprintf(stderr,"commentaire non ferme ");}
+	
 
 
 

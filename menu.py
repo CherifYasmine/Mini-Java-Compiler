@@ -73,7 +73,7 @@ class Run():
         self.save()
         output = subprocess.getoutput('cd syntax'+ " && "+ 'miniJava.exe < ' + filename)
         self.compiled.delete("1.0", END)
-        if output == '' :
+        if output == '' or output=='""' :
             output = "File compiled successfully"
         self.compiled.insert(1.0,chars=output)
 
